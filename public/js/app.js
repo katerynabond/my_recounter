@@ -1,7 +1,11 @@
+
+
+
 /*jshint esversion: 6*/
 const Counter = {
   rootElement: '#app',
-  count: 10,
+  countInc: 0,
+  countDec: 10,
   start: function(){
     this.cacheDOM();
     this.bindEvents();
@@ -10,24 +14,31 @@ const Counter = {
 
   cacheDOM: function(){
     this.root = document.querySelector('#app');
-    this.button = document.querySelector('#decrement');
-    this.output = document.querySelector('#output');
+    this.buttonInc = document.querySelector('#increment');
+    this.outputInc = document.querySelector('#output_increment');
+    this.buttonDec = document.querySelector('#decrement');
+    this.outputDec = document.querySelector('#output_decrement');
+
   },
 
   bindEvents: function(){
-    //only click events and only on the button
-    this.button.addEventListener('click', () =>{
-      console.log('Click!');
-     if (this.count > 0){
-      this.count -= 1;
-     }
+    this.buttonInc.addEventListener('click', () =>{
+      this.countInc += 1;
+      this.render();
+    });
+
+    this.buttonDec.addEventListener('click', () =>{
+      if (this.countDec > 0){
+      this.countDec -= 1;
+    }
       this.render();
     });
 
   },
 
   render: function(){
-    this.output.textContent = this.count;
+    this.outputInc.textContent = this.countInc;
+    this.outputDec.textContent = this.countDec;
   },
 
 };
